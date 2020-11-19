@@ -1,0 +1,15 @@
+<svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <circle r="64" id="circle" fill="#3ec3f7" cy="64" cx="64"/>
+  <polygon points="93,80.8 76,64 93,47.2  " id="triangle" fill="#E6E6E6"/>
+  <path id="base" fill="#22313F" d="m80.5,84l-42,0c-2.2,0 -4,-1.8 -4,-4l0,-32c0,-2.2 1.8,-4 4,-4l42,0c2.2,0 4,1.8 4,4l0,32c0,2.2 -1.8,4 -4,4z"/>
+  <circle r="2" id="red_light" fill="#CF000F" cy="50.3" cx="78.6"/>
+  <path id="line" fill="#E6E6E6" d="m66.5,66l-14,0c-1.1,0 -2,-0.9 -2,-2l0,0c0,-1.1 0.9,-2 2,-2l14,0c1.1,0 2,0.9 2,2l0,0c0,1.1 -0.9,2 -2,2z"/>
+ </g>
+</svg>

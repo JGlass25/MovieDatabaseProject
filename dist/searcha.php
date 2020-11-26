@@ -41,10 +41,10 @@
     <main role="main">
 
       <section class="jumbotron text-center" style="background-image: url('assets/img/projector2.png');">
-          <br></br>
           <div class="container h-100">
               <div class="row h-100 align-items-center justify-content-center text-center">
                   <div class="col-lg-10 align-self-baseline">
+                      <h1 class="text-uppercase text-white font-weight-bold">Advanced Search</h1>
                       <form action="searcha.php" method="post">
                           <div class="input-group">
                               <div class="shadow-none input-group-btn search-panel">

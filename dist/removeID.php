@@ -46,18 +46,18 @@
               <div class="row h-100 align-items-center justify-content-center text-center">
                   <div class="col-lg-10 align-self-baseline">
                       <h1 class="text-uppercase text-white font-weight-bold">Remove</h1>
-                      <form action="remove.php" method="post">
+                      <form action="removeID.php" method="post">
                           <div class="input-group">
                               <div class="shadow-none input-group-btn search-panel">
                                   <button type="button" class="btn-light btn-block btn-lg dropdown-toggle" data-toggle="dropdown">
-                                  	<span id="search_concept">Title</span> <span class="caret"></span>
+                                  	<span id="search_concept">ID</span> <span class="caret"></span>
                                   </button>
                                   <ul class="dropdown-menu" role="menu">
-                                    <li>&#10003; Title</li>
-                                    <li><a href="removeID.php">ID</a></li>
+                                    <li><a href="remove.php">Title</a></li>
+                                    <li>&#10003; ID</li>
                                   </ul>
                               </div>
-                              <input type="text" name="search" id="title" class="form-control form-control-lg" placeholder="Enter title..." aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" autofocus="" role="combobox" spellcheck="false" >
+                              <input type="text" name="search" id="ID" class="form-control form-control-lg" placeholder="Enter ID..." aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" autofocus="" role="combobox" spellcheck="false" >
 
                               <span class="input-group-btn">
                                   <button type="submit"  name="go" class="btn btn-primary btn-block btn-lg">
@@ -83,7 +83,7 @@
           if (isset($_POST['search'])) {
               $searchq = $_POST['search'];
 
-              $sql = "SELECT Movie_ID, Movie_title, Runtime, Rating, ReleaseYear from Movie WHERE Movie_title LIKE '$searchq%'";
+              $sql = "SELECT Movie_ID, Movie_title, Runtime, Rating, ReleaseYear from Movie WHERE Movie_ID LIKE '%$searchq%'";
 
               $result = $conn->query($sql);
 
@@ -145,26 +145,3 @@
     <script src="js/scripts.js"></script>
   </body>
 </html>
-
-<script>
-$(document).ready(function(){
-
- $('#title').typeahead({
-  source: function(query, result)
-  {
-   $.ajax({
-    url:"fetch.php",
-    method:"POST",
-    data:{query:query},
-    dataType:"json",
-    success:function(data)
-    {
-     result($.map(data, function(item){
-      return item;
-     }));
-    }
-   })
-  }
-});
-});
-</script>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Moive Interface</title>
+    <title>Genre Search</title>
     <!-- Typeahead -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
@@ -45,19 +45,20 @@
           <div class="container h-100">
               <div class="row h-100 align-items-center justify-content-center text-center">
                   <div class="col-lg-10 align-self-baseline">
-                      <form action="add.php" method="post">
+                      <form action="searchg.php" method="post">
                           <div class="input-group">
                               <div class="shadow-none input-group-btn search-panel">
                                   <button type="button" class="btn-light btn-block btn-lg dropdown-toggle" data-toggle="dropdown">
-                                  	<span id="search_concept">Title</span> <span class="caret"></span>
+                                  	<span id="search_concept">Genre</span> <span class="caret"></span>
                                   </button>
                                   <ul class="dropdown-menu" role="menu">
-                                    <li>&#10003; Title</li>
+                                    <li><a href="search.php">Title</a></li>
+                                    <li><a href="searcha.php">Actor</a></li>
                                     <li><a href="searchd.php">Director</a></li>
-                                    <li><a href="searchg.php">Genre</a></li>
+                                    <li>&#10003; Genre</li>
                                   </ul>
                               </div>
-                              <input type="text" name="search" id="title" class="form-control form-control-lg" placeholder="Search by title..." aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" autofocus="" role="combobox" spellcheck="false" >
+                              <input type="text" name="search" id="title" class="form-control form-control-lg" placeholder="Search by genre..." aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" autofocus="" role="combobox" spellcheck="false" >
 
                               <span class="input-group-btn">
                                   <button type="submit"  name="go" class="btn btn-primary btn-block btn-lg">
@@ -149,29 +150,33 @@
                       $ratq = $ratq . "'" . $rating[($N-1)] . "'" . ")";
                   }
               } else {
-                  echo("No Ratings Selected.");
-                  echo("<br>");
-                  $ratq = "('')";
+                  $ratq = "('G','PG','PG-13','R','NC-17')";
               }
 
-              $yearIneqVal = $_POST["yearInequalityInput"];
+                if (isset($_POST['yearInequalityInput'])) {
+                    $yearIneqVal = $_POST["yearInequalityInput"];
 
-                if (isset($_POST['yearForm'])) {
-                    if($yearIneqVal == "0"){
+                    if (isset($_POST['yearForm'])) {
+                        if($yearIneqVal == "0"){
+                            $yearIneq = ">";
+                            $yearq = 1800;
+                        }
+                        elseif($yearIneqVal == "1"){
+                            $yearIneq = ">";
+                            $yearq = $_POST['yearForm'];
+                        }
+                        elseif($yearIneqVal == "2"){
+                            $yearIneq = "<";
+                            $yearq = $_POST['yearForm'];
+                        }
+                        elseif($yearIneqVal == "3"){
+                            $yearIneq = "=";
+                            $yearq = $_POST['yearForm'];
+                        }
+                    }
+                    else {
                         $yearIneq = ">";
                         $yearq = 1800;
-                    }
-                    elseif($yearIneqVal == "1"){
-                        $yearIneq = ">";
-                        $yearq = $_POST['yearForm'];
-                    }
-                    elseif($yearIneqVal == "2"){
-                        $yearIneq = "<";
-                        $yearq = $_POST['yearForm'];
-                    }
-                    elseif($yearIneqVal == "3"){
-                        $yearIneq = "=";
-                        $yearq = $_POST['yearForm'];
                     }
                 }
                 else {
@@ -180,35 +185,40 @@
                 }
 
 
-              $lenIneqVal = $_POST["lengthInequalityInput"];
+                if (isset($_POST['lengthInequalityInput'])) {
+                    $lenIneqVal = $_POST["lengthInequalityInput"];
+                      if (isset($_POST['lengthForm'])) {
+                          if($lenIneqVal == "0"){
+                              $lenIneq = ">";
+                              $lenq = 0;
+                          }
+                          elseif($lenIneqVal == "1"){
+                              $lenIneq = ">";
+                              $lenq = $_POST['lengthForm'];
+                          }
+                          elseif($lenIneqVal == "2"){
+                              $lenIneq = "<";
+                              $lenq = $_POST['lengthForm'];
+                          }
+                          elseif($lenIneqVal == "3"){
+                              $lenIneq = "=";
+                              $lenq = $_POST['lengthForm'];
+                          }
+                      }
+                      else {
+                          $lenIneq = ">";
+                          $lenq = 0;
+                      }
+                }
+                else {
+                    $lenIneq = ">";
+                    $lenq = 0;
+                }
 
-              if (isset($_POST['lengthForm'])) {
-                  if($lenIneqVal == "0"){
-                      $lenIneq = ">";
-                      $lenq = 0;
-                  }
-                  elseif($lenIneqVal == "1"){
-                      $lenIneq = ">";
-                      $lenq = $_POST['lengthForm'];
-                  }
-                  elseif($lenIneqVal == "2"){
-                      $lenIneq = "<";
-                      $lenq = $_POST['lengthForm'];
-                  }
-                  elseif($lenIneqVal == "3"){
-                      $lenIneq = "=";
-                      $lenq = $_POST['lengthForm'];
-                  }
-              }
-              else {
-                  $lenIneq = ">";
-                  $lenq = 0;
-              }
 
 
 
-
-              $sql = "SELECT Movie_ID, Movie_title, Runtime, Rating, ReleaseYear FROM Movie WHERE Movie_title LIKE '$searchq%' AND Rating in $ratq AND ReleaseYear $yearIneq $yearq AND Runtime $lenIneq $lenq";
+              $sql = "SELECT Movie_title, Runtime, Rating, ReleaseYear, name as genre FROM Movie join Movie_has_Genre MhG on Movie.Movie_id = MhG.Movie_Movie_id join Genre G on G.Genre_id = MhG.Genre_Genre_id WHERE name LIKE '$searchq%' AND Rating in $ratq AND ReleaseYear $yearIneq $yearq AND Runtime $lenIneq $lenq";
 
               $result = $conn->query($sql);
 
@@ -216,11 +226,11 @@
                   echo " <table class='table-dark table-striped'>
                             <tbody>
                               <tr>
-                                <td><center><h5>&nbsp; ID &nbsp;</h5></center></td>
-                                <td><center><h5>&nbsp; Title &nbsp;</h5></center></td>
-                                <td><center><h5>&nbsp; Runtime &nbsp;</h5></center></td>
-                                <td><center><h5>&nbsp; Rating &nbsp;</h5></center></td>
-                                <td><center><h5>&nbsp; Year &nbsp;</h5></center></td>
+                                <td><center><h5>&emsp; Title &emsp;</h5></center></td>
+                                <td><center><h5>&emsp; Runtime &emsp;</h5></center></td>
+                                <td><center><h5>&emsp; Rating &emsp;</h5></center></td>
+                                <td><center><h5>&emsp; Year &emsp;</h5></center></td>
+                                <td><center><h5>&emsp; Genre &emsp;</h5></center></td>
                               </tr>
                           ";
 
@@ -228,11 +238,11 @@
                   while ($row = $result->fetch_assoc()) {
                       ?>
                 <tr>
-                  <td> <center><?php echo $row['Movie_ID'] ?> </center></td>
                   <td> <?php echo $row['Movie_title'] ?> </td>
                   <td> <center><?php echo $row['Runtime'] ?> </center></td>
                   <td> <center><?php echo $row['Rating'] ?> </center></td>
                   <td> <center><?php echo $row['ReleaseYear'] ?> </center></td>
+                  <td> <center><?php echo $row['genre'] ?> </center></td>
                 </tr>
               <?php
                   }
@@ -261,11 +271,6 @@
     <script src="js/scripts.js"></script>
   </body>
 </html>
-<!--
-$('input.typeahead').bind("typeahead:selected", function () {
-        $("form").submit();
-    });
--->
 
 <script>
 $(document).ready(function(){
@@ -274,7 +279,7 @@ $(document).ready(function(){
   source: function(query, result)
   {
    $.ajax({
-    url:"fetch.php",
+    url:"fetchg.php",
     method:"POST",
     data:{query:query},
     dataType:"json",

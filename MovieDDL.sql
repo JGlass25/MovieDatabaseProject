@@ -11,11 +11,11 @@ create table Movie(
     Description TEXT(1000),
     PRIMARY KEY (Movie_id)
 );
+ALTER TABLE Movie MODIFY COLUMN Movie_title VARCHAR(200);
 
 create table Genre(
     Genre_id INT NOT NULL,
     name VARCHAR(45) NOT NULL,
-    superGenre VARCHAR(45),
     PRIMARY KEY (Genre_id)
 );
 
@@ -35,9 +35,10 @@ create TABLE Director(
     last_name VARCHAR(45) NOT NULL,
     gender VARCHAR(45) NOT NULL,
     birthdate DATE NOT NULL,
-    age INT NOT NULL,
     PRIMARY KEY (Director_id)
 );
+ALTER TABLE Director ADD deathdate DATE NULL;
+
 
 create TABLE Movie_has_Director(
     Movie_Movie_id INT NOT NULL,
@@ -55,18 +56,19 @@ create TABLE Actor(
     last_name VARCHAR(45) NOT NULL,
     gender VARCHAR(45) NOT NULL,
     birthdate DATE NOT NULL,
-    age INT NOT NULL,
     PRIMARY KEY (Actor_id)
+
 );
+ALTER TABLE Actor ADD deathdate DATE NULL;
 
-create TABLE Actor_has_Movie(
-    Actor_Actor_id INT NOT NULL,
+create TABLE Movie_has_Actor(
     Movie_Movie_id INT NOT NULL,
+    Actor_Actor_id INT NOT NULL,
 
-    PRIMARY KEY (Actor_Actor_id, Movie_Movie_id),
+    PRIMARY KEY (Movie_Movie_id, Actor_Actor_id),
 
-    FOREIGN KEY (Actor_Actor_id) REFERENCES Actor (Actor_id),
-    FOREIGN KEY (Movie_Movie_id) REFERENCES Movie (Movie_id)
+    FOREIGN KEY (Movie_Movie_id) REFERENCES Movie(Movie_id),
+    FOREIGN KEY (Actor_Actor_id) REFERENCES Actor(Actor_id)
 );
 
 create TABLE Poster(

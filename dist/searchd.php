@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Moive Interface</title>
+    <title>Director Search</title>
     <!-- Typeahead -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
@@ -45,19 +45,20 @@
           <div class="container h-100">
               <div class="row h-100 align-items-center justify-content-center text-center">
                   <div class="col-lg-10 align-self-baseline">
-                      <form action="add.php" method="post">
+                      <form action="searchd.php" method="post">
                           <div class="input-group">
                               <div class="shadow-none input-group-btn search-panel">
                                   <button type="button" class="btn-light btn-block btn-lg dropdown-toggle" data-toggle="dropdown">
-                                  	<span id="search_concept">Title</span> <span class="caret"></span>
+                                  	<span id="search_concept">Director</span> <span class="caret"></span>
                                   </button>
                                   <ul class="dropdown-menu" role="menu">
-                                    <li>&#10003; Title</li>
-                                    <li><a href="searchd.php">Director</a></li>
+                                    <li><a href="search.php">Title</a></li>
+                                    <li><a href="searcha.php">Actor</a></li>
+                                    <li>&#10003;Director</li>
                                     <li><a href="searchg.php">Genre</a></li>
                                   </ul>
                               </div>
-                              <input type="text" name="search" id="title" class="form-control form-control-lg" placeholder="Search by title..." aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" autofocus="" role="combobox" spellcheck="false" >
+                              <input type="text" name="search" id="name" class="form-control form-control-lg" placeholder="Search by name..." aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" autofocus="" role="combobox" spellcheck="false" >
 
                               <span class="input-group-btn">
                                   <button type="submit"  name="go" class="btn btn-primary btn-block btn-lg">
@@ -67,28 +68,8 @@
                               </span>
                           </div>
                           <br></br>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="formRating[]" id="cbg" value="G" checked>
-                                <label class="form-check-label" for="cbg" style="color:lightgray">G</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="formRating[]" id="cbpg" value="PG" checked>
-                                <label class="form-check-label" for="cbpg" style="color:lightgray">PG</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="formRating[]" id="cbpg13" value="PG-13" checked>
-                                <label class="form-check-label" for="cbpg13" style="color:lightgray">PG-13</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="formRating[]" id="cbr" value="R" checked>
-                                <label class="form-check-label" for="cbr" style="color:lightgray">R</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="formRating[]" id="cbnc17" value="NC-17" checked>
-                                <label class="form-check-label" for="cbnc17" style="color:lightgray">NC-17</label>
-                            </div>
-                          <br></br>
                           <div class="form-row">
+                              <div class="col-auto">&emsp; &emsp; &emsp; &emsp; &emsp;&emsp;</div>
                               <div class="col-auto my-1">
                                 <label class="mr-sm-2 sr-only" for="selectInequalityYear">Inequality</label>
                                 <select class="form-control mr-sm-2" id="selectInequalityYear" name="yearInequalityInput">
@@ -99,22 +80,16 @@
                                 </select>
                             </div>
                             <div class="col-xs-1 my-1">
-                              <input type="number" placeholder="Release Year" name="yearForm" id="yearForm" class="form-control form-control">
+                              <input type="number" placeholder="Birth Year" name="yearForm" id="yearForm" class="form-control form-control">
                             </div>
-
-                            <div class="col-auto">&emsp; &emsp; &emsp; &emsp; &emsp;</div>
-
-                              <div class="col-auto my-1">
-                                <label class="mr-sm-2 sr-only" for="selectInequalityLength">Inequality</label>
-                                <select class="form-control mr-sm-2" id="selectInequalityLength" name="lengthInequalityInput">
-                                  <option selected value="0">All Runtimes</option>
-                                  <option value="1">Greater Than</option>
-                                  <option value="2">Less Than</option>
-                                  <option value="3">Equal</option>
-                                </select>
+                            <div class="col-auto">&emsp; &emsp; &emsp; &emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="formGender[]" id="cbm" value="M" checked>
+                                <label class="form-check-label" for="cbm" style="color:lightgray">M</label>
                             </div>
-                            <div class="col-xs-1 my-1">
-                              <input type="number" placeholder="Runtime (min)" name="lengthForm" id="lengthForm" class="form-control form-control">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="formGender[]" id="cbf" value="F" checked>
+                                <label class="form-check-label" for="cbf" style="color:lightgray">F</label>
                             </div>
                           </div>
                       </form>
@@ -132,83 +107,61 @@
           //collect
           if (isset($_POST['search'])) {
               $searchq = $_POST['search'];
-              if (isset($_POST['formRating'])) {
-                  $rating = $_POST['formRating'];
+              if (isset($_POST['formGender'])) {
+                  $rating = $_POST['formGender'];
 
-                  $ratq = "(";
+                  $genderq = "(";
 
                   $N = count($rating);
                   if($N < 2) {
-                      $ratq = $ratq . "'" . $rating[0] . "'" . ")";
+                      $genderq = $genderq . "'" . $rating[0] . "'" . ")";
                   }
                   else{
-                      for($i=0; $i < ($N-1) ; $i++)
-                      {
-                        $ratq = $ratq . "'" . $rating[$i] . "'" . ",";
-                      }
-                      $ratq = $ratq . "'" . $rating[($N-1)] . "'" . ")";
+                      $genderq = "('M','F')";
                   }
               } else {
-                  echo("No Ratings Selected.");
-                  echo("<br>");
-                  $ratq = "('')";
+                  $genderq = "('M','F')";
               }
 
-              $yearIneqVal = $_POST["yearInequalityInput"];
+                if (isset($_POST['yearInequalityInput'])) {
+                    $yearIneqVal = $_POST["yearInequalityInput"];
 
-                if (isset($_POST['yearForm'])) {
-                    if($yearIneqVal == "0"){
+                    if (isset($_POST['yearForm'])) {
+                        if($yearIneqVal == "0"){
+                            $yearIneq = ">";
+                            $yearq = "1800-00-00";
+                        }
+                        elseif($yearIneqVal == "1"){
+                            $yearIneq = ">";
+                            $yearq = "'" . $_POST['yearForm'] . "-12-31'";
+                        }
+                        elseif($yearIneqVal == "2"){
+                            $yearIneq = "<";
+                            $yearq = "'" . $_POST['yearForm'] . "-01-01'";
+                        }
+                        elseif($yearIneqVal == "3"){
+                            $yearIneq = "BETWEEN";
+                            $yearq = "'" . $_POST['yearForm'] . "-01-01' AND '" .  $_POST['yearForm'] . "-12-31'";
+                        }
+                    }
+                    else {
                         $yearIneq = ">";
-                        $yearq = 1800;
-                    }
-                    elseif($yearIneqVal == "1"){
-                        $yearIneq = ">";
-                        $yearq = $_POST['yearForm'];
-                    }
-                    elseif($yearIneqVal == "2"){
-                        $yearIneq = "<";
-                        $yearq = $_POST['yearForm'];
-                    }
-                    elseif($yearIneqVal == "3"){
-                        $yearIneq = "=";
-                        $yearq = $_POST['yearForm'];
+                        $yearq = "1800-00-00";
                     }
                 }
                 else {
                     $yearIneq = ">";
-                    $yearq = 1800;
+                    $yearq = "1800-00-00";
                 }
 
+              $sql = "Select Movie_title, runtime, rating, releaseYear, CONCAT(first_name, ' ', last_name) as director, gender, DATE_FORMAT(birthdate, '%b %e, %Y') as birthdate,
+                        CASE
+                            WHEN deathdate IS null THEN FLOOR(datediff(current_date, birthdate) / 365.25 )
+                            ELSE FLOOR(datediff(deathdate, birthdate) / 365.25 )
+                        END AS age
 
-              $lenIneqVal = $_POST["lengthInequalityInput"];
-
-              if (isset($_POST['lengthForm'])) {
-                  if($lenIneqVal == "0"){
-                      $lenIneq = ">";
-                      $lenq = 0;
-                  }
-                  elseif($lenIneqVal == "1"){
-                      $lenIneq = ">";
-                      $lenq = $_POST['lengthForm'];
-                  }
-                  elseif($lenIneqVal == "2"){
-                      $lenIneq = "<";
-                      $lenq = $_POST['lengthForm'];
-                  }
-                  elseif($lenIneqVal == "3"){
-                      $lenIneq = "=";
-                      $lenq = $_POST['lengthForm'];
-                  }
-              }
-              else {
-                  $lenIneq = ">";
-                  $lenq = 0;
-              }
-
-
-
-
-              $sql = "SELECT Movie_ID, Movie_title, Runtime, Rating, ReleaseYear FROM Movie WHERE Movie_title LIKE '$searchq%' AND Rating in $ratq AND ReleaseYear $yearIneq $yearq AND Runtime $lenIneq $lenq";
+                        from Director join Movie_has_Director MhD on Director.Director_id = MhD.Director_Director_id join Movie M on M.Movie_id = MhD.Movie_Movie_id
+                        WHERE (last_name LIKE '$searchq%' OR first_name LIKE '$searchq%' OR CONCAT(first_name, ' ', last_name) LIKE '$searchq%') AND gender in $genderq AND birthdate $yearIneq $yearq";
 
               $result = $conn->query($sql);
 
@@ -216,11 +169,14 @@
                   echo " <table class='table-dark table-striped'>
                             <tbody>
                               <tr>
-                                <td><center><h5>&nbsp; ID &nbsp;</h5></center></td>
-                                <td><center><h5>&nbsp; Title &nbsp;</h5></center></td>
-                                <td><center><h5>&nbsp; Runtime &nbsp;</h5></center></td>
-                                <td><center><h5>&nbsp; Rating &nbsp;</h5></center></td>
-                                <td><center><h5>&nbsp; Year &nbsp;</h5></center></td>
+                                <td><center><h5>&emsp; Title &emsp;</h5></center></td>
+                                <td><center><h5>&emsp; Runtime &emsp;</h5></center></td>
+                                <td><center><h5>&emsp; Rating &emsp;</h5></center></td>
+                                <td><center><h5>&emsp; Year &emsp;</h5></center></td>
+                                <td><center><h5>&emsp; Director &emsp;</h5></center></td>
+                                <td><center><h5>&emsp; Gender &emsp;</h5></center></td>
+                                <td><center><h5>&emsp; Birthdate &emsp;</h5></center></td>
+                                <td><center><h5>&emsp; Age &emsp;</h5></center></td>
                               </tr>
                           ";
 
@@ -228,11 +184,14 @@
                   while ($row = $result->fetch_assoc()) {
                       ?>
                 <tr>
-                  <td> <center><?php echo $row['Movie_ID'] ?> </center></td>
                   <td> <?php echo $row['Movie_title'] ?> </td>
-                  <td> <center><?php echo $row['Runtime'] ?> </center></td>
-                  <td> <center><?php echo $row['Rating'] ?> </center></td>
-                  <td> <center><?php echo $row['ReleaseYear'] ?> </center></td>
+                  <td> <center><?php echo $row['runtime'] ?> </center></td>
+                  <td> <center><?php echo $row['rating'] ?> </center></td>
+                  <td> <center><?php echo $row['releaseYear'] ?> </center></td>
+                  <td> <?php echo $row['director'] ?> </td>
+                  <td> <center><?php echo $row['gender'] ?> </center></td>
+                  <td> <?php echo $row['birthdate'] ?> </td>
+                  <td> <center><?php echo $row['age'] ?> </center></td>
                 </tr>
               <?php
                   }
@@ -261,20 +220,15 @@
     <script src="js/scripts.js"></script>
   </body>
 </html>
-<!--
-$('input.typeahead').bind("typeahead:selected", function () {
-        $("form").submit();
-    });
--->
 
 <script>
 $(document).ready(function(){
 
- $('#title').typeahead({
+ $('#name').typeahead({
   source: function(query, result)
   {
    $.ajax({
-    url:"fetch.php",
+    url:"fetchd.php",
     method:"POST",
     data:{query:query},
     dataType:"json",

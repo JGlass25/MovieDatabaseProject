@@ -39,212 +39,64 @@
     </nav>
 
     <main role="main">
+        <section class="jumbotron text-center" style="background-image: url('assets/img/projector2.png');">
+            <br></br>
+            <div class="container h-100">
+                <div class="row h-100 align-items-center justify-content-center text-center">
+                    <div class="col-lg-10 align-self-baseline">
+                        <h1 class="text-uppercase text-white font-weight-bold">New Movie Form</h1>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <section class="jumbotron text-center" style="background-image: url('assets/img/projector2.png');">
-          <br></br>
-          <div class="container h-100">
-              <div class="row h-100 align-items-center justify-content-center text-center">
-                  <div class="col-lg-10 align-self-baseline">
-                      <form action="add.php" method="post">
-                          <div class="input-group">
-                              <div class="shadow-none input-group-btn search-panel">
-                                  <button type="button" class="btn-light btn-block btn-lg dropdown-toggle" data-toggle="dropdown">
-                                  	<span id="search_concept">Title</span> <span class="caret"></span>
-                                  </button>
-                                  <ul class="dropdown-menu" role="menu">
-                                    <li>&#10003; Title</li>
-                                    <li><a href="searchd.php">Director</a></li>
-                                    <li><a href="searchg.php">Genre</a></li>
-                                  </ul>
-                              </div>
-                              <input type="text" name="search" id="title" class="form-control form-control-lg" placeholder="Search by title..." aria-autocomplete="both" aria-haspopup="false" autocapitalize="off" autocomplete="off" autocorrect="off" autofocus="" role="combobox" spellcheck="false" >
+        <div class="row h-100 align-items-center justify-content-center text-center">
+            <form method="post" action="insertionFunctions.php">
+                <div class="form-group">
+                    <label for="MovieInput1">Movie I.D. </label>
+                    <input type="number" class="form-control" name="Movie_ID" id="MovieInput1" value=
+                    <?php
+                        include 'conf/connection.php';
 
-                              <span class="input-group-btn">
-                                  <button type="submit"  name="go" class="btn btn-primary btn-block btn-lg">
-                                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/><path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-                                      </svg>
-                                  </button>
-                              </span>
-                          </div>
-                          <br></br>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="formRating[]" id="cbg" value="G" checked>
-                                <label class="form-check-label" for="cbg" style="color:lightgray">G</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="formRating[]" id="cbpg" value="PG" checked>
-                                <label class="form-check-label" for="cbpg" style="color:lightgray">PG</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="formRating[]" id="cbpg13" value="PG-13" checked>
-                                <label class="form-check-label" for="cbpg13" style="color:lightgray">PG-13</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="formRating[]" id="cbr" value="R" checked>
-                                <label class="form-check-label" for="cbr" style="color:lightgray">R</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="formRating[]" id="cbnc17" value="NC-17" checked>
-                                <label class="form-check-label" for="cbnc17" style="color:lightgray">NC-17</label>
-                            </div>
-                          <br></br>
-                          <div class="form-row">
-                              <div class="col-auto my-1">
-                                <label class="mr-sm-2 sr-only" for="selectInequalityYear">Inequality</label>
-                                <select class="form-control mr-sm-2" id="selectInequalityYear" name="yearInequalityInput">
-                                  <option selected value ="0">All Years</option>
-                                  <option value="1">Greater Than</option>
-                                  <option value="2">Less Than</option>
-                                  <option value="3">Equal</option>
-                                </select>
-                            </div>
-                            <div class="col-xs-1 my-1">
-                              <input type="number" placeholder="Release Year" name="yearForm" id="yearForm" class="form-control form-control">
-                            </div>
+                        $sql = "SELECT max(Movie_ID) FROM Movie";
 
-                            <div class="col-auto">&emsp; &emsp; &emsp; &emsp; &emsp;</div>
+                        $result = $conn->query($sql);
 
-                              <div class="col-auto my-1">
-                                <label class="mr-sm-2 sr-only" for="selectInequalityLength">Inequality</label>
-                                <select class="form-control mr-sm-2" id="selectInequalityLength" name="lengthInequalityInput">
-                                  <option selected value="0">All Runtimes</option>
-                                  <option value="1">Greater Than</option>
-                                  <option value="2">Less Than</option>
-                                  <option value="3">Equal</option>
-                                </select>
-                            </div>
-                            <div class="col-xs-1 my-1">
-                              <input type="number" placeholder="Runtime (min)" name="lengthForm" id="lengthForm" class="form-control form-control">
-                            </div>
-                          </div>
-                      </form>
-                  </div>
-              </div>
-          </div>
-      </section>
+                        $row = $result->fetch_assoc();
+                        echo $row['max(Movie_ID)']+1;
 
-      <div class="album py-5 bg-light">
-        <div class="container">
-        <center>
-        <div id="titleList"></div>
-        <?php
-          include 'conf/connection.php';
-          //collect
-          if (isset($_POST['search'])) {
-              $searchq = $_POST['search'];
-              if (isset($_POST['formRating'])) {
-                  $rating = $_POST['formRating'];
+                        $conn->close();
 
-                  $ratq = "(";
+                     ?>
+                    >
 
-                  $N = count($rating);
-                  if($N < 2) {
-                      $ratq = $ratq . "'" . $rating[0] . "'" . ")";
-                  }
-                  else{
-                      for($i=0; $i < ($N-1) ; $i++)
-                      {
-                        $ratq = $ratq . "'" . $rating[$i] . "'" . ",";
-                      }
-                      $ratq = $ratq . "'" . $rating[($N-1)] . "'" . ")";
-                  }
-              } else {
-                  echo("No Ratings Selected.");
-                  echo("<br>");
-                  $ratq = "('')";
-              }
+                    <label for="MovieInput2">Movie Title </label>
+                    <input type="text" class="form-control" name="Movie_title" id="MovieInput2" placeholder="Title">
 
-              $yearIneqVal = $_POST["yearInequalityInput"];
+                    <label for="MovieInput3">Runtime (min) </label>
+                    <input type="number" class="form-control" name="Runtime" id="MovieInput3" placeholder="Minutes">
 
-                if (isset($_POST['yearForm'])) {
-                    if($yearIneqVal == "0"){
-                        $yearIneq = ">";
-                        $yearq = 1800;
-                    }
-                    elseif($yearIneqVal == "1"){
-                        $yearIneq = ">";
-                        $yearq = $_POST['yearForm'];
-                    }
-                    elseif($yearIneqVal == "2"){
-                        $yearIneq = "<";
-                        $yearq = $_POST['yearForm'];
-                    }
-                    elseif($yearIneqVal == "3"){
-                        $yearIneq = "=";
-                        $yearq = $_POST['yearForm'];
-                    }
-                }
-                else {
-                    $yearIneq = ">";
-                    $yearq = 1800;
-                }
+                    <label for="MovieInput4">Rating </label>
+                    <select class="form-control" name="Rating" id="MovieInput4">
+                        <option value="" disabled selected>Rating</option>
+                        <option value="G">G</option>
+                        <option value="PG">PG</option>
+                        <option value="PG-13">PG-13</option>
+                        <option value="R">R</option>
+                        <option value="NC-17">NC-17</option>
+                    </select>
 
+                    <label for="MovieInput5">Release Year </label>
+                    <input type="number" class="form-control" name="ReleaseYear" id="MovieInput5" placeholder="Year">
 
-              $lenIneqVal = $_POST["lengthInequalityInput"];
-
-              if (isset($_POST['lengthForm'])) {
-                  if($lenIneqVal == "0"){
-                      $lenIneq = ">";
-                      $lenq = 0;
-                  }
-                  elseif($lenIneqVal == "1"){
-                      $lenIneq = ">";
-                      $lenq = $_POST['lengthForm'];
-                  }
-                  elseif($lenIneqVal == "2"){
-                      $lenIneq = "<";
-                      $lenq = $_POST['lengthForm'];
-                  }
-                  elseif($lenIneqVal == "3"){
-                      $lenIneq = "=";
-                      $lenq = $_POST['lengthForm'];
-                  }
-              }
-              else {
-                  $lenIneq = ">";
-                  $lenq = 0;
-              }
-
-
-
-
-              $sql = "SELECT Movie_ID, Movie_title, Runtime, Rating, ReleaseYear FROM Movie WHERE Movie_title LIKE '$searchq%' AND Rating in $ratq AND ReleaseYear $yearIneq $yearq AND Runtime $lenIneq $lenq";
-
-              $result = $conn->query($sql);
-
-              if ($result -> num_rows > 0) {
-                  echo " <table class='table-dark table-striped'>
-                            <tbody>
-                              <tr>
-                                <td><center><h5>&nbsp; ID &nbsp;</h5></center></td>
-                                <td><center><h5>&nbsp; Title &nbsp;</h5></center></td>
-                                <td><center><h5>&nbsp; Runtime &nbsp;</h5></center></td>
-                                <td><center><h5>&nbsp; Rating &nbsp;</h5></center></td>
-                                <td><center><h5>&nbsp; Year &nbsp;</h5></center></td>
-                              </tr>
-                          ";
-
-                  // output data of each row
-                  while ($row = $result->fetch_assoc()) {
-                      ?>
-                <tr>
-                  <td> <center><?php echo $row['Movie_ID'] ?> </center></td>
-                  <td> <?php echo $row['Movie_title'] ?> </td>
-                  <td> <center><?php echo $row['Runtime'] ?> </center></td>
-                  <td> <center><?php echo $row['Rating'] ?> </center></td>
-                  <td> <center><?php echo $row['ReleaseYear'] ?> </center></td>
-                </tr>
-              <?php
-                  }
-                  echo "</tbody></table>";
-              } else {
-                  echo 'No Results';
-              }
-              $conn->close();
-          }
-        ?>
-    </center>
-
+                    <label for="MovieInput6">Description </label>
+                    <input type="text" class="form-control" name="Description" id="MovieInput6" placeholder="Description">
+                </div>
+                <button type="submit" name="insertIntoMovie" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
     </main>
 
     <footer class="bg-light py-5">
@@ -261,31 +113,3 @@
     <script src="js/scripts.js"></script>
   </body>
 </html>
-<!--
-$('input.typeahead').bind("typeahead:selected", function () {
-        $("form").submit();
-    });
--->
-
-<script>
-$(document).ready(function(){
-
- $('#title').typeahead({
-  source: function(query, result)
-  {
-   $.ajax({
-    url:"fetch.php",
-    method:"POST",
-    data:{query:query},
-    dataType:"json",
-    success:function(data)
-    {
-     result($.map(data, function(item){
-      return item;
-     }));
-    }
-   })
-  }
-});
-});
-</script>

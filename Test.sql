@@ -43,3 +43,9 @@ Select Movie_title, runtime, rating, CONCAT(first_name, ' ', last_name) as direc
                         WHERE (last_name LIKE '$searchq%' OR first_name LIKE '$searchq%' OR CONCAT(first_name, ' ', last_name) LIKE '$searchq%') AND gender in $genderq AND birthdate $yearIneq $yearq";
 
 SELECT Movie_ID, Movie_title, Runtime, Rating, ReleaseYear from Movie;
+
+SELECT * from Poster;
+
+Select * from Movie;
+
+SELECT max(Movie_ID) as new FROM Movie;

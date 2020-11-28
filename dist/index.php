@@ -84,16 +84,7 @@
           <div class="col-lg-8 text-center">
             <h2 class="text-center mt-0">Got a New Movie?</h2>
             <hr class="divider my-4" />
-            <form>
-              <div class="form-row">
-                <div class="col-12 col-md-9 mb-2 mb-md-0">
-                    <input type="text" class="form-control form-control-lg" placeholder="Enter the title...">
-                </div>
-                    <div class="col-12 col-md-3">
-                <button type="submit" class="btn-secondary btn-block btn-lg btn-primary">Add</button>
-                </div>
-              </div>
-            </form>
+            <a class="btn btn-dark btn-xl" href="add.php">Go to the Add Form</a>
           </div>
         </div>
       </div>
@@ -104,6 +95,14 @@
         <h2 class="mb-4">Delete Movie</h2>
         <hr class="divider light my-4" />
         <a class="btn btn-light btn-xl" href="remove.php">Go to the Delete Form</a>
+      </div>
+    </section>
+    <!-- Update -->
+    <section class="page-section bg-primary" id="update">
+      <div class="container text-center">
+        <h2 class="mb-4">Update Actor/Director</h2>
+        <hr class="divider light my-4" />
+        <a class="btn btn-light btn-xl" href="update.php">Go to the Update Form</a>
       </div>
     </section>
     <!-- Info-->

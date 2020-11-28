@@ -4,14 +4,14 @@ use team2_db;
 
 create table Movie(
     Movie_id INT NOT NULL,
-    Movie_title VARCHAR(45) NOT NULL,
+    Movie_title VARCHAR(200) NOT NULL,
     Runtime INT NOT NULL,
     Rating VARCHAR(5) NOT NULL,
     ReleaseYear YEAR(4) NOT NULL,
     Description TEXT(1000),
     PRIMARY KEY (Movie_id)
+
 );
-ALTER TABLE Movie MODIFY COLUMN Movie_title VARCHAR(200);
 
 create table Genre(
     Genre_id INT NOT NULL,
@@ -25,7 +25,8 @@ create TABLE Movie_has_Genre(
 
     PRIMARY KEY (Movie_Movie_id, Genre_Genre_id),
 
-    FOREIGN KEY (Movie_Movie_id) REFERENCES Movie(Movie_id),
+    FOREIGN KEY (Movie_Movie_id) REFERENCES Movie(Movie_id)
+    ON DELETE CASCADE,
     FOREIGN KEY (Genre_Genre_id) REFERENCES Genre(Genre_id)
 );
 
@@ -33,7 +34,7 @@ create TABLE Director(
     Director_id INT NOT NULL,
     first_name VARCHAR(45) NOT NULL,
     last_name VARCHAR(45) NOT NULL,
-    gender VARCHAR(45) NOT NULL,
+    gender VARCHAR(1) NOT NULL,
     birthdate DATE NOT NULL,
     PRIMARY KEY (Director_id)
 );
@@ -46,7 +47,8 @@ create TABLE Movie_has_Director(
 
     PRIMARY KEY (Movie_Movie_id, Director_Director_id),
 
-    FOREIGN KEY (Movie_Movie_id) REFERENCES Movie(Movie_id),
+    FOREIGN KEY (Movie_Movie_id) REFERENCES Movie(Movie_id)
+    ON DELETE CASCADE,
     FOREIGN KEY (Director_Director_id) REFERENCES Director(Director_id)
 );
 
@@ -54,7 +56,7 @@ create TABLE Actor(
     Actor_id INT NOT NULL,
     first_name VARCHAR(45) NOT NULL,
     last_name VARCHAR(45) NOT NULL,
-    gender VARCHAR(45) NOT NULL,
+    gender VARCHAR(1) NOT NULL,
     birthdate DATE NOT NULL,
     PRIMARY KEY (Actor_id)
 
@@ -67,7 +69,8 @@ create TABLE Movie_has_Actor(
 
     PRIMARY KEY (Movie_Movie_id, Actor_Actor_id),
 
-    FOREIGN KEY (Movie_Movie_id) REFERENCES Movie(Movie_id),
+    FOREIGN KEY (Movie_Movie_id) REFERENCES Movie(Movie_id)
+    ON DELETE CASCADE,
     FOREIGN KEY (Actor_Actor_id) REFERENCES Actor(Actor_id)
 );
 
@@ -79,4 +82,75 @@ create TABLE Poster(
     PRIMARY KEY (Poster_id),
 
     FOREIGN KEY (Movie_Movie_id) REFERENCES Movie(Movie_id)
+    ON DELETE CASCADE
 );
+
+CREATE INDEX movie_title
+ON Movie(Movie_title);
+
+CREATE INDEX actor_name
+ON Actor(last_name);
+
+CREATE INDEX director_name
+ON Director(last_name);
+
+CREATE INDEX genre_name
+ON Genre(name);
+
+DELIMITER $$
+USE team2_db $$
+CREATE PROCEDURE checkIfGenreExists(IN genreName VARCHAR(45))
+BEGIN
+
+    IF exists(select name from Genre where name = genreName) THEN
+        Select Genre_id as genreID from Genre where name = genreName;
+    ELSE
+        Select -1 as genreID;
+    end if;
+
+END $$
+DELIMITER;
+
+DELIMITER $$
+USE team2_db $$
+CREATE PROCEDURE checkIfActorExists(IN actor_fName VARCHAR(45), IN actor_lName VARCHAR(45), IN actor_date DATE)
+BEGIN
+
+    IF exists(select * from Actor where last_name = actor_lname AND first_name = actor_fname AND birthdate = actor_date) THEN
+        Select Actor_id  as actorID from Actor where last_name = actor_lname AND first_name = actor_fname AND birthdate = actor_date;
+    ELSE
+        Select -1 as actorID;
+    end if;
+
+END $$
+DELIMITER;
+
+SELECT * from Actor;
+
+DELIMITER $$
+USE team2_db $$
+CREATE PROCEDURE checkIfDirectorExists(IN director_fName VARCHAR(45), IN director_lName VARCHAR(45), IN director_date DATE)
+BEGIN
+
+    IF exists(select * from Director where last_name = director_lname AND first_name = director_fname AND birthdate = director_date) THEN
+        Select Director_id as directorID from Director where last_name = director_lname AND first_name = director_fname AND birthdate = director_date;
+    ELSE
+        Select -1 as directorID;
+    end if;
+
+END $$
+DELIMITER;
+
+DELIMITER $$
+USE team2_db $$
+CREATE PROCEDURE checkIfMovieExists(IN title VARCHAR(200), IN rt INT, IN releaseYr INT)
+BEGIN
+
+    IF exists(Select * from Movie Where Movie_title = title AND runtime = rt AND ReleaseYear = releaseYr) THEN
+        Select Movie_id as movieID from Movie Where Movie_title = title AND runtime = rt AND ReleaseYear = releaseYr;
+    ELSE
+        Select -1 as movieID;
+    end if;
+
+END $$
+DELIMITER;

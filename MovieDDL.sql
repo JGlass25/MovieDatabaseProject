@@ -128,8 +128,6 @@ BEGIN
 END $$
 DELIMITER;
 
-SELECT * from Actor;
-
 DELIMITER $$
 USE team2_db $$
 CREATE PROCEDURE checkIfDirectorExists(IN director_fName VARCHAR(45), IN director_lName VARCHAR(45), IN director_date DATE)
@@ -157,3 +155,24 @@ BEGIN
 
 END $$
 DELIMITER;
+
+CREATE VIEW movieActors as Select Actor_id, first_name, last_name, gender, birthdate,
+                        CASE
+                            WHEN deathdate IS null THEN FLOOR(datediff(current_date, birthdate) / 365.25 )
+                            ELSE FLOOR(datediff(deathdate, birthdate) / 365.25 )
+                        END AS age,
+                        deathdate,
+                        Movie_id, Movie_title, Runtime, Rating, ReleaseYear, Description
+                        from Actor join Movie_has_Actor MhA on Actor.Actor_id = MhA.Actor_Actor_id join Movie M on M.Movie_id = MhA.Movie_Movie_id;
+
+CREATE VIEW movieDirectors as Select Director_id, first_name, last_name, gender, birthdate,
+                        CASE
+                            WHEN deathdate IS null THEN FLOOR(datediff(current_date, birthdate) / 365.25 )
+                            ELSE FLOOR(datediff(deathdate, birthdate) / 365.25 )
+                        END AS age,
+                        deathdate,
+                        Movie_id, Movie_title, Runtime, Rating, ReleaseYear, Description
+                        from Director join Movie_has_Director MhD on Director.Director_id = MhD.Director_Director_id join Movie M on M.Movie_id = MhD.Movie_Movie_id;
+
+Create VIEW movieGenres as Select Genre_id, name, Movie_id, Movie_title, Runtime, Rating, ReleaseYear, Description
+from Genre join Movie_has_Genre MhG on Genre.Genre_id = MhG.Genre_Genre_id join Movie M on M.Movie_id = MhG.Movie_Movie_id;

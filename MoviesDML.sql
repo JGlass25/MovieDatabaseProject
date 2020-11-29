@@ -1,12 +1,5 @@
-INSERT INTO Movie_has_Actor VALUES(Movie_Movie_id, Actor_Actor_id);
-INSERT INTO Movie_has_Director VALUES(Movie_Movie_id, Director_Director_id);
-INSERT INTO Movie_has_Genre VALUES(Movie_Movie_id, Genre_Genre_id);
-
-
 show databases;
 use team2_db;
-show tables;
-desc Actor;
 
 INSERT INTO Movie VALUES(00001, 'Django Unchained', 165, 'R', 2012, 'With the help of a German bounty hunter, a freed slave sets out to rescue his wife from a brutal Mississippi plantation owner.');
 
@@ -44,8 +37,6 @@ INSERT INTO Actor VALUES(000008, 'Ving', 'Rhames', 'M', '1959-05-12',null);
 INSERT INTO Actor VALUES(000009, 'Tim', 'Roth', 'M', '1961-05-14',null);
 INSERT INTO Actor VALUES(000010, 'Amanda', 'Plummer', 'M', '1957-03-23',null);
 INSERT INTO Actor VALUES(000011, 'Uma', 'Thurman', 'M', '1970-04-29',null);
-
-SELECT * from Actor;
 
 INSERT INTO Movie_has_Actor VALUES(00002, 000005);
 INSERT INTO Movie_has_Actor VALUES(00002, 000006);
@@ -205,4 +196,3 @@ INSERT INTO Movie_has_Genre VALUES(00007, 006);
 INSERT INTO Movie_has_Genre VALUES(00007, 007);
 INSERT INTO Movie_has_Genre VALUES(00007, 009);
 INSERT INTO Movie_has_Genre VALUES(00007, 010);
-

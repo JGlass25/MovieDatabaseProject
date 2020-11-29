@@ -84,7 +84,7 @@
                         <div class="row">
                             <div class="col">
                                 <label for="MovieInput3">Runtime (min) </label>
-                                <input type="number" class="form-control" name="Runtime" id="MovieInput3" placeholder="Minutes">
+                                <input type="number" class="form-control" name="Runtime" id="MovieInput3" placeholder="Minutes" min = "0">
                             </div>
                             <div class="col">
                                 <label for="MovieInput4">Rating </label>
@@ -101,7 +101,7 @@
                         <div class="row">
                             <div class="col">
                                 <label for="MovieInput5">Release Year </label>
-                                <input type="number" class="form-control" name="ReleaseYear" id="MovieInput5" placeholder="Year">
+                                <input type="number" class="form-control" name="ReleaseYear" id="MovieInput5" placeholder="Year" max = "2020" min = "1700">
                             </div>
                             <div class="col">
                                 <label for="MovieInput6">Description </label>

@@ -218,7 +218,7 @@
 
 
 
-              $sql = "SELECT Movie_ID, Movie_title, Runtime, Rating, ReleaseYear FROM Movie WHERE Movie_title LIKE '$searchq%' AND Rating in $ratq AND ReleaseYear $yearIneq $yearq AND Runtime $lenIneq $lenq";
+              $sql = "SELECT Movie_ID, Movie_title, Runtime, Rating, ReleaseYear FROM Movie WHERE Movie_title LIKE '$searchq%' AND Rating in $ratq AND ReleaseYear $yearIneq $yearq AND Runtime $lenIneq $lenq ORDER BY Movie_title";
 
               $result = $conn->query($sql);
 

@@ -218,7 +218,7 @@
 
 
 
-              $sql = "SELECT Movie_title, Runtime, Rating, ReleaseYear, name as genre FROM Movie join Movie_has_Genre MhG on Movie.Movie_id = MhG.Movie_Movie_id join Genre G on G.Genre_id = MhG.Genre_Genre_id WHERE name LIKE '$searchq%' AND Rating in $ratq AND ReleaseYear $yearIneq $yearq AND Runtime $lenIneq $lenq";
+              $sql = "SELECT Movie_title, Runtime, Rating, ReleaseYear, name as genre FROM Movie join Movie_has_Genre MhG on Movie.Movie_id = MhG.Movie_Movie_id join Genre G on G.Genre_id = MhG.Genre_Genre_id WHERE name LIKE '$searchq%' AND Rating in $ratq AND ReleaseYear $yearIneq $yearq AND Runtime $lenIneq $lenq ORDER BY genre";
 
               $result = $conn->query($sql);
 

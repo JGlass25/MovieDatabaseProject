@@ -165,11 +165,12 @@ if(isset($_POST['insertIntoMovie'])){
     }
     $conn->close();
 
-    include("add.php");
     header("Location: add.php");
     echo '<script language="javascript">';
     echo 'alert("record has been inserted into db successfully")';
     echo '</script>';
+    include("add.php");
+
 
 }
 

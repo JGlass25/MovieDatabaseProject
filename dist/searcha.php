@@ -160,7 +160,7 @@
                             ELSE FLOOR(datediff(deathdate, birthdate) / 365.25 )
                         END AS age
                         from Movie join Movie_has_Actor MhA on Movie.Movie_id = MhA.Movie_Movie_id join Actor A on A.Actor_id = MhA.Actor_Actor_id
-                        WHERE (last_name LIKE '$searchq%' OR first_name LIKE '$searchq%' OR CONCAT(first_name, ' ', last_name) LIKE '$searchq%') AND gender in $genderq AND birthdate $yearIneq $yearq";
+                        WHERE (last_name LIKE '$searchq%' OR first_name LIKE '$searchq%' OR CONCAT(first_name, ' ', last_name) LIKE '$searchq%') AND gender in $genderq AND birthdate $yearIneq $yearq ORDER BY last_name";
 
               $result = $conn->query($sql);
 

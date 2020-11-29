@@ -43,7 +43,9 @@ Select * from Movie;
 Select * from Actor;
 Delete from Actor Where Actor_id > 38;
 
-Select * from Genre;
+Select count(*) from Genre ORDER BY Genre_id;
+Select * from Genre ORDER BY Genre_id;
+
 Delete from Genre Where Genre_id > 10;
 
 Select * from Director;
@@ -135,6 +137,13 @@ call checkIfMovieExists('Aladdin', 90, 1992);
 
 Select * from Movie Where Movie_title = "Aladdin" AND runtime = 90 AND ReleaseYear = 1992;
 
-Select * from Genre;
+Select count(*) from Actor;
 
 Select * from Movie_has_Genre;
+
+INSERT INTO Genre VALUES(24, 'Horror');
+INSERT INTO Genre VALUES(25, 'Documentary');
+INSERT INTO Genre VALUES(26, 'Religious');
+INSERT INTO Genre VALUES(11, 'Educational');
+
+Delete from Genre where Genre_id = 11;

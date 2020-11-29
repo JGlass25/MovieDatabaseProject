@@ -26,7 +26,8 @@ create TABLE Movie_has_Genre(
     PRIMARY KEY (Movie_Movie_id, Genre_Genre_id),
 
     FOREIGN KEY (Movie_Movie_id) REFERENCES Movie(Movie_id)
-    ON DELETE CASCADE,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
     FOREIGN KEY (Genre_Genre_id) REFERENCES Genre(Genre_id)
 );
 
@@ -39,7 +40,7 @@ create TABLE Director(
     PRIMARY KEY (Director_id)
 );
 ALTER TABLE Director ADD deathdate DATE NULL;
-
+ALTER TABLE Director ADD CHECK (deathdate > birthdate);
 
 create TABLE Movie_has_Director(
     Movie_Movie_id INT NOT NULL,
@@ -62,6 +63,7 @@ create TABLE Actor(
 
 );
 ALTER TABLE Actor ADD deathdate DATE NULL;
+ALTER TABLE Actor ADD CHECK (deathdate > birthdate);
 
 create TABLE Movie_has_Actor(
     Movie_Movie_id INT NOT NULL,
@@ -70,7 +72,8 @@ create TABLE Movie_has_Actor(
     PRIMARY KEY (Movie_Movie_id, Actor_Actor_id),
 
     FOREIGN KEY (Movie_Movie_id) REFERENCES Movie(Movie_id)
-    ON DELETE CASCADE,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
     FOREIGN KEY (Actor_Actor_id) REFERENCES Actor(Actor_id)
 );
 

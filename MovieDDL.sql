@@ -79,7 +79,7 @@ create TABLE Movie_has_Actor(
 
 create TABLE Poster(
     Poster_id INT NOT NULL,
-    Image BLOB NOT NULL,
+    Image BLOB,
     Movie_Movie_id INT NOT NULL,
 
     PRIMARY KEY (Poster_id),
